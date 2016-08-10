@@ -3,7 +3,7 @@ package com.webmihir;
 import java.util.HashMap;
 
 
-public class Solution {
+public class Leetcode {
   /**
    * URL: https://leetcode.com/problems/two-sum/
    *
