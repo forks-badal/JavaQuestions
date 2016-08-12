@@ -1,6 +1,7 @@
 package com.webmihir;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 
 public class Leetcode {
@@ -17,6 +18,10 @@ public class Leetcode {
    * Because nums[0] + nums[1] = 2 + 7 = 9,
    * return [0, 1].
    *
+   * Explanation of solution:
+   * for every number in the array, if (target-num) is present in the array, we have found the solution.
+   * So loop through the array and check if (target-nums[i]) is present in the hashmap.
+   * If not, add nums[i] to the hashmap. Return (i, hashmap[target-nums[i]]) if found, or null if not found.
    * @param nums
    * @param target
    * @return
@@ -46,10 +51,12 @@ public class Leetcode {
   public static class ListNode {
     int val;
     ListNode next;
+
     ListNode(int x) {
       val = x;
     }
   }
+
   /**
    * https://leetcode.com/problems/add-two-numbers/
    *
@@ -145,10 +152,119 @@ public class Leetcode {
    * Given "pwwkew", the answer is "wke", with the length of 3.
    * Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
    *
+   * Solution Explanation:
+   * https://leetcode.com/articles/longest-substring-without-repeating-characters/
+   *
    * @param s
    * @return
    */
   public int lengthOfLongestSubstring(String s) {
-    return 0;
+    HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+    int result = 0;
+
+    if (s == null || s.length() == 0) {
+      return result;
+    }
+
+    int i = 0, j = 0;
+
+    while (j < s.length()) {
+      char ch = s.charAt(j);
+      if (!map.containsKey(ch) || map.get(ch) < i) {
+        result = Math.max(result, j - i + 1);
+        map.put(ch, j++);
+      } else {
+        i = map.get(ch) + 1;
+      }
+    }
+
+    return result;
+  }
+
+  //Less optimal, N^2 solution of above question
+  public int lengthOfLongestSubstring_n_square(String s) {
+    int longestLength = 0;
+
+    if (s == null || s.length() == 0) {
+      return longestLength;
+    }
+
+    for (int i = 0; i < s.length(); i++) {
+      HashSet<Character> chars = new HashSet<Character>();
+      int currentLength = 1;
+      chars.add(s.charAt(i));
+
+      int k = i + 1;
+      for (; k < s.length(); k++) {
+        if (chars.contains(s.charAt(k))) {
+          longestLength = Math.max(longestLength, (k - i));
+          break;
+        }
+        chars.add(s.charAt(k));
+      }
+
+      if (k == s.length()) {
+        longestLength = Math.max(longestLength, (k - i));
+      }
+    }
+    return longestLength;
+  }
+
+  /**
+   * There are two sorted arrays nums1 and nums2 of size m and n respectively.
+   *
+   * Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
+   *
+   * Example 1:
+   * nums1 = [1, 3]
+   * nums2 = [2]
+   * The median is 2.0
+   *
+   * Example 2:
+   * nums1 = [1, 2]
+   * nums2 = [3, 4]
+   * The median is (2 + 3)/2 = 2.5
+   *
+   * Solution: http://www.geeksforgeeks.org/median-of-two-sorted-arrays/
+   *
+   */
+  public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+
+    int l1 = nums1 != null ? nums1.length : 0;
+    int l2 = nums2 != null ? nums2.length : 0;
+
+    int total = l1 + l2;
+    if (total % 2 == 1) { //odd number of ints
+      int mid = (total + 1) / 2;
+
+      return findElement(nums1, nums2, mid);
+    }
+
+    int mid = total / 2;
+    return ((double) (findElement(nums1, nums2, mid) + findElement(nums1, nums2, mid + 1))) / 2;
+  }
+
+  private int findElement(int[] nums1, int[] nums2, int index) {
+    int i = 0, j = 0;
+
+    while (i + j < index - 1) {
+      if (i == nums1.length) {
+        j++;
+      } else if (j == nums2.length) {
+        i++;
+      } else if (nums1[i] < nums2[j]) {
+        i++;
+      } else {
+        j++;
+      }
+    }
+
+    if (i >= nums1.length) {
+      return nums2[j];
+    }
+    if (j >= nums2.length) {
+      return nums1[i];
+    }
+    return Math.min(nums1[i], nums2[j]);
   }
 }
