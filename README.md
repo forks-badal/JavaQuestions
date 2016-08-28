@@ -17,8 +17,19 @@ Use the following resources to prepare for SWE interviews. Note that this is not
 
 - Learn more about company culture & interview format - **Glassdoor.com**
 
-- Design Questions - https://github.com/checkcheckzz/system-design-interview
 
+# Topic-Specific Resources:
+- Design Questions:
+  + https://github.com/checkcheckzz/system-design-interview
+  + http://www.HiredInTech.com
+
+- Dynamic Programming:
+  + https://www.quora.com/Are-there-any-good-resources-or-tutorials-for-dynamic-programming-besides-the-TopCoder-tutorial
+  + http://20bits.com/article/introduction-to-dynamic-programming
+  + https://people.cs.clemson.edu/~bcdean/dp_practice/
+
+- Recursion:
+- Graphs:
 
 # Few Tips:
 - For questions with recursive solution, practice the iterative solution too. This is a common Interview variation
@@ -37,15 +48,18 @@ Use the following resources to prepare for SWE interviews. Note that this is not
 
 - **Remember Common Data Structure functions**:
     + String:
-        - .length()
-        - .charAt(index)
-        - .toCharArray()
+      - .length() : int
+      - .charAt(index) : char
+      - .toCharArray() : char[]
     + HashMap:
-        - .put(key, value)
-        - .get(key)
-        - .containsKey(key)
-        - .size()
+      - .put(key, value) : void
+      - .get(key) : T value
+      - .containsKey(key) : boolean
+      - .size() : int
     + HashSet:
+      - .add(key): void
+      - .contains(key): boolean
     + Array:
     + List:
     + LinkedList:
+
