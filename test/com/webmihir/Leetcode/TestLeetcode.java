@@ -1,6 +1,8 @@
 package com.webmihir.Leetcode;
 
 import com.webmihir.DataProviderSrc;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -173,5 +175,40 @@ public class TestLeetcode {
     }
 
     service.shutdown();
+  }
+
+  @Test
+  public void testThreeSum() throws Exception {
+    int[] array = {-1, 3, 1, 8, 5, 2}; //-1 1 2 3 5 8
+    ThreeSum t = new ThreeSum();
+    Assert(t.threeNumberSum(array, 8));
+    Assert(t.threeNumberSum(array, 9));
+    Assert(t.threeNumberSum(array, 10));
+    Assert(t.threeNumberSum(array, 11));
+    Assert(t.threeNumberSum(array, 12));
+    Assert(t.threeNumberSum(array, 13));
+    Assert(t.threeNumberSum(array, 14));
+    Assert(t.threeNumberSum(array, 15));
+    Assert(t.threeNumberSum(array, 16));
+    Assert(! t.threeNumberSum(array, 17));
+  }
+
+  @Test
+  public void testTopFrequentWords() throws Exception {
+    String[] array = new String[] {"might", "lite", "bar", "foo", "bar", "foo", "lite"," foo", "foo", "bar"};
+    // {"might", "foo", "bar", "lite", "bar", "bar", "lite", "foo", "foo", "foo"};
+
+    TopFrequentWords top = new TopFrequentWords();
+
+    AssertEquals(top.topNFrequentWords(array, 1), new ArrayList<String>(Arrays.asList(new String[] {"foo"})));
+    AssertEquals(top.topNFrequentWords(array, 2), new ArrayList<String>(Arrays.asList(new String[] {"foo", "bar"})));
+    AssertEquals(top.topNFrequentWords(array, 3), new ArrayList<String>(Arrays.asList(new String[] {"foo", "bar", "lite"})));
+    AssertEquals(top.topNFrequentWords(array, 4), new ArrayList<String>(Arrays.asList(new String[] {"foo", "bar", "lite", "might"})));
+  }
+
+  @Test
+  public void testAbsolutePathResolution() throws Exception {
+    AbsolutePathResolution apr = new AbsolutePathResolution();
+    AssertEquals(apr.simplifyPath("/."), "/");
   }
 }
